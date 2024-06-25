@@ -115,7 +115,7 @@ const Products = () => {
             >
               <div className="card text-center h-100" key={product.id}>
                 <img
-                  className="card-img-top p-3"
+                  className="card-img-top p-3 object-fit-contain border rounded"
                   src={product.image}
                   alt="Card"
                   height={300}
