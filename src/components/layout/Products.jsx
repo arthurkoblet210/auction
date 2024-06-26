@@ -151,6 +151,9 @@ const Products = () => {
                   className="col-md-6 col-sm-6 col-xl-3 mb-4"
                 >
                   <div className="card text-center h-100" key={product.id}>
+                    <h5 className="card-title">
+                      {product.title.substring(0, 12)}...
+                    </h5>
                     <img
                       className="card-img-top p-3 object-fit-contain border rounded"
                       src={product.image}
@@ -158,25 +161,20 @@ const Products = () => {
                       height={300}
                     />
                     <div className="card-body">
-                      <h5 className="card-title">
-                        {product.title.substring(0, 12)}...
-                      </h5>
-                      <p className="card-text">
+                      {/* <p className="card-text">
                         {product.description.substring(0, 90)}...
-                      </p>
+                      </p> */}
                     </div>
                     <ul className="list-group list-group-flush">
                       <li className="list-group-item lead">
-                        <p>
-                          $ {product.price}{" "}
-                          {seconds === 0 ? seconds : `(${formatTime(seconds)})`}
-                        </p>
-                      </li>
-                      <li className="list-group-item">
-                        Dapibus ac facilisis in
+                        <span>Current bid - $ {product.price} </span>
+                        <span className="fs-6">
+                          Time left -{" "}
+                          {seconds === 0 ? "ended" : `(${formatTime(seconds)})`}
+                        </span>
                       </li>
                     </ul>
-                    <div className="card-body">
+                    {/* <div className="card-body">
                       <Link
                         to={"/product/" + product.id}
                         className="btn btn-dark m-1"
@@ -189,7 +187,7 @@ const Products = () => {
                       >
                         Detail
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               );
