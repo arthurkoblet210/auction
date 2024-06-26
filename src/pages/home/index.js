@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <Main />
+      {/* <Main /> */}
       <Product />
       <Footer />
     </>
