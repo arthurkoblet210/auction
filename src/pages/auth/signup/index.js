@@ -105,6 +105,7 @@ const SignupPage = () => {
                   name="Country"
                   value={value}
                   onChange={changeHandler}
+                  placeholder="Select a country..."
                 />
                 {error && <p>Please select a country.</p>}
               </div>

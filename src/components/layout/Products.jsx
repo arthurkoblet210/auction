@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addCart } from "../../redux/action";
+import Dropdown from "react-bootstrap/Dropdown";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+
+import './index.css';
 
 let componentMounted = true;
 
@@ -19,8 +24,9 @@ const Products = () => {
 
   // useEffect(() => {
   //   if (seconds > 0) {
-  //     setTimeout(() => setSeconds((prev) => prev - 1), 1000);
+  //     setInterval(() => setSeconds((prev) => prev - 1), 1000);
   //   } else {
+  //     clearInterval();
   //     setSeconds(0);
   //   }
   // }, [seconds]);
@@ -59,35 +65,50 @@ const Products = () => {
   const Loading = () => {
     return (
       <>
-        <div className="col-md-2 col-sm-12 col-xs-2 text-center py-5 d-flex flex-column">
-          <Skeleton height={40} />
-          <Skeleton height={40} />
-          <Skeleton height={40} />
+        <div className="col-12 col-md-3 col-sm-12 col-xl-2 text-center py-5 d-flex flex-column">
           <Skeleton height={40} />
           <Skeleton height={40} />
           <Skeleton height={40} />
           <Skeleton height={40} />
           <Skeleton height={40} />
         </div>
-        <div className="col-md-10 col-sm-12 col-xs-10">
+        <div className="col-12 col-md-9 col-sm-12 col-xl-10 py-5">
           <div className="row">
-            <div className="col-md-4 col-sm-6 col-xs-4 mb-4">
-              <Skeleton height={592} />
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
             </div>
-            <div className="col-md-4 col-sm-6 col-xs-4 mb-4">
-              <Skeleton height={592} />
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
             </div>
-            <div className="col-md-4 col-sm-6 col-xs-4 mb-4">
-              <Skeleton height={592} />
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
             </div>
-            <div className="col-md-4 col-sm-6 col-xs-4 mb-4">
-              <Skeleton height={592} />
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
             </div>
-            <div className="col-md-4 col-sm-6 col-xs-4 mb-4">
-              <Skeleton height={592} />
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
             </div>
-            <div className="col-md-4 col-sm-6 col-xs-4 mb-4">
-              <Skeleton height={592} />
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
+            </div>
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
+            </div>
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
+            </div>
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
+            </div>
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
+            </div>
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
+            </div>
+            <div className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4">
+              <Skeleton height={280} />
             </div>
           </div>
         </div>
@@ -102,7 +123,7 @@ const Products = () => {
 
   const CatergoryView = () => {
     return (
-      <div className="col-md-4 col-sm-12 col-xl-2 text-center py-5 d-flex flex-column">
+      <div className="view col-12 col-md-3 col-sm-12 col-xl-2 text-center py-5 d-flex flex-column">
         <button
           className="btn btn-outline-dark btn-sm m-2"
           onClick={() => setFilter(data)}
@@ -137,57 +158,69 @@ const Products = () => {
     );
   };
 
+  const CatergoryViewCustomize = () => {
+    return (
+      <Dropdown as={ButtonGroup} className="viewCustomize">
+        <Button variant="success">Category</Button>
+
+        <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={() => setFilter(data)}>All</Dropdown.Item>
+          <Dropdown.Item onClick={() => filterProduct("men's clothing")}>
+            Men's Clothing
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => filterProduct("women's clothing")}>
+            Women's Clothing
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => filterProduct("jewelery")}>
+            Jewelery
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => filterProduct("electronics")}>
+            Electronics
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  };
+
   const ShowProducts = () => {
     return (
       <>
         <CatergoryView />
-        <div className="col-md-8 col-sm-12 col-xl-10 py-5">
+        <div className="col-12 col-md-9 col-sm-12 col-xl-10 py-5">
           <div className="row">
             {filter.map((product) => {
               return (
                 <div
                   id={product.id}
                   key={product.id}
-                  className="col-md-6 col-sm-6 col-xl-3 mb-4"
+                  className="col-6 col-md-4 col-sm-6 col-xl-3 mb-4"
                 >
-                  <div className="card text-center h-100" key={product.id}>
-                    <h5 className="card-title">
-                      {product.title.substring(0, 12)}...
-                    </h5>
+                  <div className="card text-center h-auto" key={product.id}>
+                    <Link
+                      className="card-title text-nowrap overflow-hidden my-3 px-3"
+                      to={`/product/${product.id}`}
+                    >
+                      {product.title}
+                    </Link>
                     <img
                       className="card-img-top p-3 object-fit-contain border rounded"
                       src={product.image}
                       alt="Card"
-                      height={300}
+                      height={150}
                     />
-                    <div className="card-body">
-                      {/* <p className="card-text">
-                        {product.description.substring(0, 90)}...
-                      </p> */}
-                    </div>
                     <ul className="list-group list-group-flush">
                       <li className="list-group-item lead">
-                        <span>Current bid - $ {product.price} </span>
-                        <span className="fs-6">
+                        <div className="row fs-6 d-flex justify-content-center">
+                          Current bid - $ {product.price}{" "}
+                        </div>
+                        <div className="row fs-6 d-flex justify-content-center">
                           Time left -{" "}
                           {seconds === 0 ? "ended" : `(${formatTime(seconds)})`}
-                        </span>
+                        </div>
                       </li>
                     </ul>
-                    {/* <div className="card-body">
-                      <Link
-                        to={"/product/" + product.id}
-                        className="btn btn-dark m-1"
-                      >
-                        Bid (Simulate When user login)
-                      </Link>
-                      <button
-                        className="btn btn-dark m-1"
-                        onClick={() => addProduct(product)}
-                      >
-                        Detail
-                      </button>
-                    </div> */}
                   </div>
                 </div>
               );
@@ -197,16 +230,22 @@ const Products = () => {
       </>
     );
   };
+
   return (
     <>
       <div className="container my-3 py-3">
-        <div className="row gx-5">
+        <div className="row gx-5 gy-2">
           <div className="col-12">
             <h2 className="text-center">Auction Products</h2>
+          </div>
+          <div className="col-12 text-center">
+            <CatergoryViewCustomize />
             <hr />
           </div>
         </div>
-        <div className="row">{loading ? <Loading /> : <ShowProducts />}</div>
+        <div className="row">
+          {loading ? <Loading /> : <ShowProducts />}
+        </div>
       </div>
     </>
   );

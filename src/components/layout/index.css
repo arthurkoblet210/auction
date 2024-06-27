@@ -1,0 +1,21 @@
+.view {
+  display: flex !important;
+}
+.viewCustomize {
+  display: none !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .view {
+    display: none !important;
+  }
+  .viewCustomize {
+    display: block !important;
+  }
+}
+
+/* @media screen and (max-width: 600px) {
+  .viewCustomize {
+    display: block;
+  }
+} */
