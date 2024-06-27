@@ -10,26 +10,30 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-import './index.css';
+import "./index.css";
 
 let componentMounted = true;
 
 const Products = () => {
   const [data, setData] = useState([]);
-  const [filter, setFilter] = useState(data);
+  const [filter, setFilter] = useState([]);
   const [loading, setLoading] = useState(false);
   const [seconds, setSeconds] = useState(24 * 60 * 60);
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (seconds > 0) {
-  //     setInterval(() => setSeconds((prev) => prev - 1), 1000);
-  //   } else {
-  //     clearInterval();
-  //     setSeconds(0);
-  //   }
-  // }, [seconds]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds((prev) => prev - 1);
+      } else {
+        clearInterval(interval);
+        setSeconds(0);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval); // Clear the interval on component unmount
+  }, [seconds]);
 
   const formatTime = (seconds) => {
     let hours = Math.floor(seconds / 3600);
@@ -49,8 +53,9 @@ const Products = () => {
     setLoading(true);
     const response = await fetch("https://fakestoreapi.com/products/");
     if (componentMounted) {
-      setData(await response.clone().json());
-      setFilter(await response.json());
+      const responseData = await response.json();
+      setData(responseData);
+      setFilter(responseData);
       setLoading(false);
     }
     return () => {
@@ -121,7 +126,7 @@ const Products = () => {
     setFilter(updatedList);
   };
 
-  const CatergoryView = () => {
+  const CategoryView = () => {
     return (
       <div className="view col-12 col-md-3 col-sm-12 col-xl-2 text-center py-5 d-flex flex-column">
         <button
@@ -158,7 +163,7 @@ const Products = () => {
     );
   };
 
-  const CatergoryViewCustomize = () => {
+  const CategoryViewCustomize = () => {
     return (
       <Dropdown as={ButtonGroup} className="viewCustomize">
         <Button variant="success">Category</Button>
@@ -187,7 +192,7 @@ const Products = () => {
   const ShowProducts = () => {
     return (
       <>
-        <CatergoryView />
+        <CategoryView />
         <div className="col-12 col-md-9 col-sm-12 col-xl-10 py-5">
           <div className="row">
             {filter.map((product) => {
@@ -239,13 +244,11 @@ const Products = () => {
             <h2 className="text-center">Auction Products</h2>
           </div>
           <div className="col-12 text-center">
-            <CatergoryViewCustomize />
+            <CategoryViewCustomize />
             <hr />
           </div>
         </div>
-        <div className="row">
-          {loading ? <Loading /> : <ShowProducts />}
-        </div>
+        <div className="row">{loading ? <Loading /> : <ShowProducts />}</div>
       </div>
     </>
   );
